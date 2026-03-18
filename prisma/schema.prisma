@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  plan          Plan      @default(FREE)
+  planExpiresAt DateTime?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  orders        Order[]
+}
+enum Plan { FREE START PRO MAX }
+enum Role { USER ADMIN }
+model Order {
+  id            String      @id @default(cuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  plan          Plan
+  amount        Float
+  status        OrderStatus @default(PENDING)
+  pixPayload    String?
+  pixTxid       String?
+  orderBump     Boolean     @default(false)
+  orderBumpPlan Plan?
+  createdAt     DateTime    @default(now())
+  paidAt        DateTime?
+}
+enum OrderStatus { PENDING PAID CANCELLED EXPIRED }

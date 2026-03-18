@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-base: #0A0D14;
+  --bg-surface: #111827;
+  --bg-card: #1C2333;
+  --accent-blue: #3B82F6;
+  --accent-green: #10B981;
+  --accent-purple: #8B5CF6;
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  --border: #1F2937;
+  --border-hover: #374151;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg-base); color: var(--text-primary); font-family: var(--font-sans); }
+h1, h2, h3, h4 { font-family: var(--font-heading); }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes pulse-ring { 0%{transform:scale(1);opacity:.4} 100%{transform:scale(2.2);opacity:0} }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
